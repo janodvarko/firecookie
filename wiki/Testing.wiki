@@ -15,7 +15,7 @@ Follow these steps to run automated tests:
   * Load `chrome://firecookie/content/testList.html` into the test console.
   * Press *Run All* button in the test console.
 
-See also <a href="http://getfirebug.com/wiki/index.php/Running_Automated_Test_Suite">Running_Automated_Test_Suite</a>.
+See also <a href="http://getfirebug.com/wiki/index.php/Running_Automated_Test_Suite">Running Automated Test Suite</a>.
 
 
 
