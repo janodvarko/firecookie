@@ -5280,8 +5280,8 @@ CookieBreakpointGroup.prototype = extend(new Firebug_Breakpoint.BreakpointGroup(
     {
         var cookie = args[0];
         return (bp.name == cookie.name) &&
-            (bp.host = cookie.host) &&
-            (bp.path = cookie.path);
+            (bp.host == cookie.host) &&
+            (bp.path == cookie.path);
     },
 
     // Persistence
