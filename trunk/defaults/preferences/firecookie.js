@@ -20,3 +20,6 @@ pref("extensions.firebug.cookies.enableSystemPages", "");
 
 // Firebug tracing support
 pref("extensions.firebug.DBG_COOKIES", false);
+
+// Shortcuts
+pref("extensions.firebug.key.shortcut.removeAllCookies", "control shift o");
