@@ -25,6 +25,10 @@
         <command id="cmd_cookieExportForSite" oncommand="Firebug.FireCookieModel.onExportForSite(FirebugContext)"/>
     </commandset>
 
+    <keyset id="mainKeyset">
+        <key id="key_removeAllCookies" key="o" modifiers="control,shift" command="cmd_cookieRemoveAll" class="fbOnlyKey"/>
+    </keyset>
+
     <!-- Firebug toolbar -->
     <toolbar id="fbToolbar" align="center">
         <hbox id="fbToolbarInner" insertbefore="fbDetachButton" flex="1" align="center">
@@ -62,6 +66,7 @@
                             onpopupshowing="return Firebug.FireCookieModel.onRemoveAllShowTooltip(this, FirebugContext)"/>
                         <menuitem id="fcRemoveAll"
                             label="firecookie.RemoveAll"
+                            key="key_removeAllCookies"
                             tooltip="fcRemoveAllTooltip" command="cmd_cookieRemoveAll"/>
 
                         <!-- Remove all session cookies -->
