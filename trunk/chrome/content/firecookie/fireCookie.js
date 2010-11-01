@@ -550,6 +550,9 @@ Firebug.FireCookieModel = extend(BaseModule,
         if (FBTrace.DBG_COOKIES)
             FBTrace.sysout("cookies.updateConsoleFilter;");
 
+        if (!Firebug.currentContext)
+            return;
+
         var panelNode = Firebug.currentContext.getPanel("console").panelNode;
         var className = "hideType-cookies";
         var filterTypes = Firebug.consoleFilterTypes;
