@@ -553,7 +553,12 @@ Firebug.FireCookieModel = extend(BaseModule,
         if (!Firebug.currentContext)
             return;
 
-        var panelNode = Firebug.currentContext.getPanel("console").panelNode;
+        // The panel can be disabled.
+        var panel = Firebug.currentContext.getPanel("console");
+        if (!panel)
+            return;
+
+        var panelNode = panel.panelNode;
         var className = "hideType-cookies";
         var filterTypes = Firebug.consoleFilterTypes;
 
