@@ -6,6 +6,12 @@ Localization: http://www.babelzilla.org/forum/index.php?showtopic=4494
 Source docs: http://www.janodvarko.cz/firecookie/docs/
 Releases: http://www.janodvarko.com/firecookie/archive/
 
+Release Notes for Firecookie 1.2
+--------------------------------
+
+== Localization ==
+    * zh-TW localization - contribution by bootleq
+
 Release Notes for Firecookie 1.1
 --------------------------------
 Firefox 3.0 - 4.0

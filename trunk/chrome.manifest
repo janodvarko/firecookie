@@ -22,5 +22,6 @@ locale  firecookie  sv-SE       chrome/locale/sv-SE/
 locale  firecookie  tr-TR       chrome/locale/tr-TR/
 locale  firecookie  uk-UA       chrome/locale/uk-UA/
 locale  firecookie  zh-CN       chrome/locale/zh-CN/
+locale  firecookie  zh-TW       chrome/locale/zh-TW/
 
 overlay chrome://firebug/content/firebugOverlay.xul         chrome://firecookie/content/fireCookie.xul
