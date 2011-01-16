@@ -430,14 +430,18 @@
 
 /************************************************************************************************/
 
-/* Hide breakpoint column within the net panel info body */
+/* Hide breakpoint column + proper header field (ie the cookieBreakpointBar) within the net
+   panel info body */
 .netInfoCookiesText .cookieInfoRow .cookieRowHeader,
+.netInfoCookiesText #cookieBreakpointBar,
 .netInfoCookiesText .cookieDebugCol {
     display: none;
 }
 
-/* Hide breakpoint column within the console panel (when logging document.cookie) */
+/* Hide breakpoint column + proper header field (ie the cookieBreakpointBar) within the
+   console panel (when logging document.cookie) */
 .documentCookieBody .cookieInfoRow .cookieRowHeader,
+.documentCookieBody #cookieBreakpointBar,
 .documentCookieBody .cookieDebugCol {
     display: none;
 }
