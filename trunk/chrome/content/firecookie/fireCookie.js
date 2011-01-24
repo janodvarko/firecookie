@@ -149,6 +149,11 @@ if (!this.JSON)
 }
 
 // ************************************************************************************************
+
+// TabWatcher is not global in Firebug 1.7
+var TabWatcher = Firebug.TabWatcher ? Firebug.TabWatcher : TabWatcher;
+
+// ************************************************************************************************
 // Module Implementation
 
 var BaseModule = Firebug.ActivableModule ? Firebug.ActivableModule : Firebug.Module;
