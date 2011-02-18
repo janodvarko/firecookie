@@ -11,6 +11,7 @@ Release Notes for Firecookie 1.2 (beta)
 
 == Bug Fixes ==
     * Issue 81: Name Value Columns incorrectly aligned in Cookie subpanel in Firebug's Net panel
+    * Issue 83: Support for Firebug 1.7
 
 == Localization ==
     * zh-TW localization - contribution by bootleq
