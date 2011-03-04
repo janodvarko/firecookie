@@ -772,7 +772,9 @@ Firebug.FireCookieModel = extend(BaseModule,
 
     onSuspendFirebug: function(context)
     {
-        if (context)
+        // The context parameter is there again in Firebug 1.6
+        // see Firebug.resumeFirebug()
+        if (context && compareFirebugVersion("1.6") < 0)
         {
             // Firebug 1.3
             this.unregisterObservers(context);
@@ -793,7 +795,9 @@ Firebug.FireCookieModel = extend(BaseModule,
 
     onResumeFirebug: function(context)
     {
-        if (context)
+        // The context parameter is there again in Firebug 1.6
+        // see Firebug.resumeFirebug()
+        if (context && compareFirebugVersion("1.6") < 0)
         {
             // Firebug 1.3
             this.registerObservers(context);
@@ -4303,7 +4307,7 @@ var CookieObserver = extend(BaseObserver,
             return;
 
         // Remove cookie from UI.
-        var row = repCookie.row;        
+        var row = repCookie.row;
         var parent = repCookie.row.parentNode;
 
         if (hasClass(repCookie.row, "opened"))
