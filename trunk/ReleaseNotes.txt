@@ -6,6 +6,12 @@ Localization: http://www.babelzilla.org/forum/index.php?showtopic=4494
 Source docs: http://www.janodvarko.cz/firecookie/docs/
 Releases: http://www.janodvarko.com/firecookie/archive/
 
+
+Release Notes for Firecookie 1.2.1
+----------------------------------
+* Issue 87: Version 1.2: TabWatcher is undefined.
+
+
 Release Notes for Firecookie 1.2
 --------------------------------
 Firebug 1.5 - 1.7
