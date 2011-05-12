@@ -12,17 +12,17 @@
     </stringbundleset>
 
     <commandset id="mainCommandSet">
-        <command id="cmd_cookieRemoveAll" oncommand="Firebug.FireCookieModel.onRemoveAll(FirebugContext)"/>
-        <command id="cmd_cookieRemoveAllSession" oncommand="Firebug.FireCookieModel.onRemoveAllSession(FirebugContext)"/>
-        <command id="cmd_cookieCreate" oncommand="Firebug.FireCookieModel.onCreateCookie(FirebugContext)"/>
-        <command id="cmd_cookieViewAll" oncommand="Firebug.FireCookieModel.onViewAll(FirebugContext)"/>
-        <command id="cmd_cookieViewExceptions" oncommand="Firebug.FireCookieModel.onViewExceptions(FirebugContext)"/>
-        <command id="cmd_cookieHelp" oncommand="Firebug.FireCookieModel.onHelp(FirebugContext)"/>
-        <command id="cmd_cookieAbout" oncommand="Firebug.FireCookieModel.onAbout(FirebugContext)"/>
-        <command id="cmd_cookieFilterByPath" oncommand="Firebug.FireCookieModel.onFilter(FirebugContext, 'firecookie.filterByPath')"/>
-        <command id="cmd_cookieShowRejectedCookies" oncommand="Firebug.FireCookieModel.onFilter(FirebugContext, 'firecookie.showRejectedCookies')"/>
-        <command id="cmd_cookieExportAll" oncommand="Firebug.FireCookieModel.onExportAll(FirebugContext)"/>
-        <command id="cmd_cookieExportForSite" oncommand="Firebug.FireCookieModel.onExportForSite(FirebugContext)"/>
+        <command id="cmd_cookieRemoveAll" oncommand="Firebug.FireCookieModel.onRemoveAll(Firebug.currentContext)"/>
+        <command id="cmd_cookieRemoveAllSession" oncommand="Firebug.FireCookieModel.onRemoveAllSession(Firebug.currentContext)"/>
+        <command id="cmd_cookieCreate" oncommand="Firebug.FireCookieModel.onCreateCookie(Firebug.currentContext)"/>
+        <command id="cmd_cookieViewAll" oncommand="Firebug.FireCookieModel.onViewAll(Firebug.currentContext)"/>
+        <command id="cmd_cookieViewExceptions" oncommand="Firebug.FireCookieModel.onViewExceptions(Firebug.currentContext)"/>
+        <command id="cmd_cookieHelp" oncommand="Firebug.FireCookieModel.onHelp(Firebug.currentContext)"/>
+        <command id="cmd_cookieAbout" oncommand="Firebug.FireCookieModel.onAbout(Firebug.currentContext)"/>
+        <command id="cmd_cookieFilterByPath" oncommand="Firebug.FireCookieModel.onFilter(Firebug.currentContext, 'firecookie.filterByPath')"/>
+        <command id="cmd_cookieShowRejectedCookies" oncommand="Firebug.FireCookieModel.onFilter(Firebug.currentContext, 'firecookie.showRejectedCookies')"/>
+        <command id="cmd_cookieExportAll" oncommand="Firebug.FireCookieModel.onExportAll(Firebug.currentContext)"/>
+        <command id="cmd_cookieExportForSite" oncommand="Firebug.FireCookieModel.onExportForSite(Firebug.currentContext)"/>
     </commandset>
 
     <keyset id="mainKeyset">
@@ -55,7 +55,7 @@
 
                         <!-- Create cookies -->
                         <tooltip id="fcCreateCookieTooltip"
-                            onpopupshowing="return Firebug.FireCookieModel.onCreateCookieShowTooltip(this, FirebugContext)"/>
+                            onpopupshowing="return Firebug.FireCookieModel.onCreateCookieShowTooltip(this, Firebug.currentContext)"/>
                         <menuitem id="fcCreate"
                             label="firecookie.Create"
                             tooltip="fcCreateCookieTooltip" command="cmd_cookieCreate"/>
@@ -63,7 +63,7 @@
 
                         <!-- Remove all cookies -->
                         <tooltip id="fcRemoveAllTooltip"
-                            onpopupshowing="return Firebug.FireCookieModel.onRemoveAllShowTooltip(this, FirebugContext)"/>
+                            onpopupshowing="return Firebug.FireCookieModel.onRemoveAllShowTooltip(this, Firebug.currentContext)"/>
                         <menuitem id="fcRemoveAll"
                             label="firecookie.RemoveAll"
                             key="key_removeAllCookies"
@@ -71,7 +71,7 @@
 
                         <!-- Remove all session cookies -->
                         <tooltip id="fcRemoveAllSessionTooltip"
-                            onpopupshowing="return Firebug.FireCookieModel.onRemoveAllSessionShowTooltip(this, FirebugContext)"/>
+                            onpopupshowing="return Firebug.FireCookieModel.onRemoveAllSessionShowTooltip(this, Firebug.currentContext)"/>
                         <menuitem id="fcRemoveAllSession"
                             label="firecookie.Remove Session Cookies"
                             tooltip="fcRemoveAllSessionTooltip" command="cmd_cookieRemoveAllSession"/>
@@ -83,7 +83,7 @@
                             tooltiptext="firecookie.export.Export All Cookies Tooltip"
                             command="cmd_cookieExportAll"/>
                         <tooltip id="fcExportForSiteTooltip"
-                            onpopupshowing="return Firebug.FireCookieModel.onExportForSiteShowTooltip(this, FirebugContext)"/>
+                            onpopupshowing="return Firebug.FireCookieModel.onExportForSiteShowTooltip(this, Firebug.currentContext)"/>
                         <menuitem id="fcExportForSite"
                             label="firecookie.export.Export For Site"
                             tooltip="fcExportForSiteTooltip" command="cmd_cookieExportForSite"/>
@@ -109,9 +109,9 @@
                         <!--<menuseparator/>
                         <menu id="fcCustomPathFilter" label="firecookie.Path Filter">
                             <menupopup id="fcCustomPathFilterPanel" ignorekeys="true"
-                                onpopupshowing="return Firebug.FireCookieModel.onFilterPanelShowing(this, FirebugContext)"
-                                onpopuphiding="return Firebug.FireCookieModel.onFilterPanelHiding(this, FirebugContext)"
-                                onapply="Firebug.FireCookieModel.onFilterPanelApply(FirebugContext)"/>
+                                onpopupshowing="return Firebug.FireCookieModel.onFilterPanelShowing(this, Firebug.currentContext)"
+                                onpopuphiding="return Firebug.FireCookieModel.onFilterPanelHiding(this, Firebug.currentContext)"
+                                onapply="Firebug.FireCookieModel.onFilterPanelApply(Firebug.currentContext)"/>
                         </menu>-->
                     </menupopup>
                 </toolbarbutton>
@@ -119,13 +119,13 @@
 
                 <!-- Cookie permissions -->
                 <tooltip id="fcPermTooltip"
-                    onpopupshowing="return Firebug.FireCookieModel.Perm.onTooltipShowing(this, FirebugContext)"/>
+                    onpopupshowing="return Firebug.FireCookieModel.Perm.onTooltipShowing(this, Firebug.currentContext)"/>
 
                 <toolbarbutton id="fcPerm" type="menu" tooltip="fcPermTooltip">
                     <menupopup id="fcPermMenuPopup"
-                        oncommand="return Firebug.FireCookieModel.Perm.onCommand(event, FirebugContext, null)"
-                        onpopupshowing="return Firebug.FireCookieModel.Perm.onPopupShowing(this, FirebugContext)"
-                        onpopuphiding="return Firebug.FireCookieModel.Perm.onPopupHiding(this, FirebugContext)">
+                        oncommand="return Firebug.FireCookieModel.Perm.onCommand(event, Firebug.currentContext, null)"
+                        onpopupshowing="return Firebug.FireCookieModel.Perm.onPopupShowing(this, Firebug.currentContext)"
+                        onpopuphiding="return Firebug.FireCookieModel.Perm.onPopupHiding(this, Firebug.currentContext)">
                         <menuitem type="radio" name="fcPerm" value="default"/>
                         <menuitem type="radio" name="fcPerm" value="host-deny"/>
                         <menuitem type="radio" name="fcPerm" value="host-allow"/>
