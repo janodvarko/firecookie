@@ -65,7 +65,6 @@ const removeSessionConfirmation = "firecookie.removeSessionConfirmation";
 const cookieManager = CCSV("@mozilla.org/cookiemanager;1", "nsICookieManager2");
 const cookieService = CCSV("@mozilla.org/cookieService;1", "nsICookieService");
 const observerService = CCSV("@mozilla.org/observer-service;1", "nsIObserverService");
-const extensionManager = CCSV("@mozilla.org/extensions/manager;1", "nsIExtensionManager");
 const permissionManager = CCSV("@mozilla.org/permissionmanager;1", "nsIPermissionManager");
 const clipboard = CCSV("@mozilla.org/widget/clipboard;1", "nsIClipboard");
 const appInfo = CCSV("@mozilla.org/xre/app-info;1", "nsIXULAppInfo");
@@ -206,7 +205,7 @@ Firebug.FireCookieModel = extend(BaseModule,
 
         // Register listener within the Console panel. If document.cookie property
         // is logged, formatted output is used.
-        Firebug.Console.addListener(this.ConsoleListener);
+        //Firebug.Console.addListener(this.ConsoleListener);
 
         // Localize UI (use firecookie.properties instead of firecookie.dtd)
         // Since Firebug 1.5 there is a "internationalizeUI" message dispatched to modules so,
@@ -215,7 +214,7 @@ Firebug.FireCookieModel = extend(BaseModule,
         this.fcInternationalizeUI();
 
         // Register debugger listener for providing cookie-breakpoints.
-        Firebug.Debugger.addListener(this.DebuggerListener);
+        //Firebug.Debugger.addListener(this.DebuggerListener);
 
         // Dynamically overlay Break on Next button in FB 1.5.1
         // There is a small decoration coming from each panel.
@@ -258,8 +257,8 @@ Firebug.FireCookieModel = extend(BaseModule,
         if ("removeListener" in netInfoBody)
             netInfoBody.removeListener(this.NetInfoBody);
 
-        Firebug.Console.removeListener(this.ConsoleListener);
-        Firebug.Debugger.removeListener(this.DebuggerListener);
+        //Firebug.Console.removeListener(this.ConsoleListener);
+        //Firebug.Debugger.removeListener(this.DebuggerListener);
     },
 
     fcInternationalizeUI: function()
@@ -1245,6 +1244,8 @@ Firebug.FireCookieModel = extend(BaseModule,
         }
         else
         {
+            var extensionManager = CCSV("@mozilla.org/extensions/manager;1", "nsIExtensionManager");
+
             var parent = context.chrome.window;
             parent.openDialog("chrome://mozapps/content/extensions/about.xul", "",
                 "chrome,centerscreen,modal", "urn:mozilla:item:firecookie@janodvarko.cz",
@@ -1819,9 +1820,17 @@ FireCookiePanel.prototype = extend(BasePanel,
             FBTrace.sysout("firecookie.FireCookiePanel.onActivationChanged; " + enable);
 
         if (enable)
+        {
             Firebug.FireCookieModel.addObserver(this);
+            Firebug.Debugger.addListener(Firebug.FireCookieModel.DebuggerListener);
+            Firebug.Console.addListener(Firebug.FireCookieModel.ConsoleListener);
+        }
         else
+        {
             Firebug.FireCookieModel.removeObserver(this);
+            Firebug.Debugger.removeListener(Firebug.FireCookieModel.DebuggerListener);
+            Firebug.Console.removeListener(Firebug.FireCookieModel.ConsoleListener);
+        }
     },
 }); 
 
@@ -2446,7 +2455,7 @@ Templates.CookieRow = domplate(Templates.Rep,
 
     onPaste: function(clickedCookie) // clickedCookie can be null if the user clicks within panel area.
     {
-        var context = FirebugContext;
+        var context = Firebug.currentContext;
         var values = CookieClipboard.getFrom();
         if (!values || !context)
             return;
@@ -2489,7 +2498,7 @@ Templates.CookieRow = domplate(Templates.Rep,
           window: null
         };
 
-        var parent = FirebugContext.chrome.window;
+        var parent = Firebug.currentContext.chrome.window;
         return parent.openDialog("chrome://firecookie/content/editCookie.xul",
             "_blank", "chrome,centerscreen,resizable=yes,modal=yes",
             params);
@@ -2540,7 +2549,7 @@ Templates.CookieRow = domplate(Templates.Rep,
     onClickRow: function(event)
     {
         if (FBTrace.DBG_COOKIES)
-            FBTrace.sysout("cookies.Click on cookie row.\n");
+            FBTrace.sysout("cookies.Click on cookie row.\n", event);
 
         if (isLeftClick(event))
         {
