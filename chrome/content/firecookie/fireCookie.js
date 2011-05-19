@@ -639,6 +639,8 @@ Firebug.FireCookieModel = extend(BaseModule,
             if (!uri)
                 return;
 
+            var c = cookie.cookie;
+
             // Fix for issue 34. The domain must be included in the cookieString if it 
             // starts with "." But don't include it otherwise, since the "." would be 
             // appended by the service.
@@ -649,11 +651,22 @@ Firebug.FireCookieModel = extend(BaseModule,
             // HttpOnly cookies can't be changed by setCookie string
             // See also: https://bugzilla.mozilla.org/show_bug.cgi?id=178993
             //cookieService.setCookieString(uri, null, cookieString, null);
-            cookieService.setCookieStringFromHttp(uri, uri, null, cookieString,
-                cookie.cookie.expires, null);
+
+            // Doesn't work in FF4 (issue 95)
+            //cookieService.setCookieStringFromHttp(uri, uri, null, cookieString,
+            //    c.expires, null);
+
+            //xxxHonza: in what cases the cookie should be removed?
+            //var cm = Cc["@mozilla.org/cookiemanager;1"].getService(Ci.nsICookieManager);
+            //cm.remove(c.host, c.name, c.path, false);
+
+            var isSession = c.expires ? false : true;
+            var cm2 = Cc["@mozilla.org/cookiemanager;1"].getService(Ci.nsICookieManager2);
+            cm2.add(c.host, c.path, c.name, c.rawValue, c.isSecure, c.isHttpOnly, isSession,
+                c.expires || Math.round((new Date()).getTime() / 1000 + 9999999999));
 
             if (FBTrace.DBG_COOKIES)
-                FBTrace.sysout("cookies.createCookie: set cookie string: " + cookieString);
+                FBTrace.sysout("cookies.createCookie: set cookie string: " + cookieString, cookie);
         }
         catch (e)
         {
@@ -3698,7 +3711,7 @@ Cookie.prototype =
         return JSON.stringify({
             name: this.cookie.name,
             value: this.cookie.rawValue,
-            expires: (this.cookie.expires ? ("'" + this.cookie.expires + "'") : 0),
+            expires: (this.cookie.expires ? this.cookie.expires : 0),
             path: (this.cookie.path ? this.cookie.path : "/"),
             host: this.cookie.host,
             isHttpOnly: (this.cookie.isHttpOnly),
@@ -3849,6 +3862,8 @@ function parseFromJSON(json)
     }
     catch (err)
     {
+        if (FBTrace.DBG_ERRORS || FBTrace.DBG_COOKIES)
+            FBTrace.sysout("Failed to parse a cookie from JSON data: " + err, err);
     }
 
     return null;
