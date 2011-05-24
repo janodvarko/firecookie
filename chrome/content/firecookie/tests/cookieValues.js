@@ -10,7 +10,7 @@ function runTest()
 
             // Make sure the Cookie panel's UI is there.
             FW.Firebug.showBar(true);
-            var panelNode = FW.FirebugChrome.selectPanel("cookies").panelNode;
+            var panelNode = FW.Firebug.chrome.selectPanel("cookies").panelNode;
 
             var row = FBTestFireCookie.getCookieRowByName(panelNode, "TestCookieValues");
 
