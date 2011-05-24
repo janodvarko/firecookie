@@ -12,6 +12,7 @@
  * 1) context.getName() has been introduced in Firebug 1.4. But this is only
  *    used for tracing.
  * 2) getWindowForRequest & getTabIdForWindow are now expected to exists (Firebug 1.3).
+ * 3) getWindowForRequest & getTabIdForWindow don't exists (Firebug 1.8).
  */
 FBL.ns(function() { with (FBL) {
 
@@ -434,7 +435,7 @@ Firebug.FireCookieModel = extend(BaseModule,
     {
         BaseModule.reattachContext.apply(this, arguments);
 
-        var chrome = context ? context.chrome : FirebugChrome;
+        var chrome = context ? context.chrome : Firebug.chrome;
 
         // The context isn't available if FB is disabled.
         if (!context)
@@ -863,7 +864,7 @@ Firebug.FireCookieModel = extend(BaseModule,
     {
         cancelEvent(event);
 
-        var browserURI = FirebugChrome.getBrowserURI(context);
+        var browserURI = Firebug.chrome.getBrowserURI(context);
         var host = this.getHostForURI(browserURI);
 
         var params = {
@@ -3744,7 +3745,7 @@ Cookie.prototype =
         if (typeof(parseJSONString) == "undefined")
             return null;
 
-        var currentURI = FirebugChrome.getCurrentURI();
+        var currentURI = Firebug.chrome.getCurrentURI();
         var jsonObject = parseJSONString(jsonString, currentURI.spec);
         if (typeof (jsonObject) != "object")
             return null;

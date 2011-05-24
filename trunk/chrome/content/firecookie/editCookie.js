@@ -1,18 +1,20 @@
 /* See license.txt for terms of usage */
 
-with (FBL) {
-
-//-----------------------------------------------------------------------------
-
 const Cc = Components.classes;
 const Ci = Components.interfaces;
+
+const windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+var FBL = windowMediator.getMostRecentWindow("navigator:browser").FBL;
+
+with (FBL) {
+
+// ********************************************************************************************* //
 
 const ioService = CCSV("@mozilla.org/network/io-service;1", "nsIIOService");
 const versionChecker = CCSV("@mozilla.org/xpcom/version-comparator;1", "nsIVersionComparator");
 const appInfo = CCSV("@mozilla.org/xre/app-info;1", "nsIXULAppInfo");
-const windowMediator = CCSV("@mozilla.org/appshell/window-mediator;1", "nsIWindowMediator");
 
-//-----------------------------------------------------------------------------
+// ********************************************************************************************* //
 
 /**
  * @dialog Edit cookie dialog implementation. This dialog is used to create a new cookie
@@ -30,14 +32,14 @@ var EditCookie =
         this.params = params;
         this.cookie = params.cookie;
 
-        this.nameNode = $("fcName");
-        this.valueNode = $("fcValue");
-        this.domainNode = $("fcDomain");
-        this.pathNode = $("fcPath");
-        this.expireNode = $("fcExpire");
-        this.sessionNode = $("fcSession");
-        this.secureNode = $("fcSecure");
-        this.httpOnly = $("fcHttpOnly");
+        this.nameNode = $("fcName", document);
+        this.valueNode = $("fcValue", document);
+        this.domainNode = $("fcDomain", document);
+        this.pathNode = $("fcPath", document);
+        this.expireNode = $("fcExpire", document);
+        this.sessionNode = $("fcSession", document);
+        this.secureNode = $("fcSecure", document);
+        this.httpOnly = $("fcHttpOnly", document);
 
         // Fix for issue 39: decode cookie name and value for usage in the dialog.
         // It'll be encoded again when OK is pressed.
@@ -88,7 +90,7 @@ var EditCookie =
 
         for (var i=0; i<elements.length; i++)
         {
-            var element = $(elements[i]);
+            var element = $(elements[i], document);
             if (element.hasAttribute("title"))
                 Firebug.FireCookieModel.fcInternationalize(element, "title");
 
@@ -242,10 +244,10 @@ var EditCookie =
     }
 }
 
-//-----------------------------------------------------------------------------
+// ********************************************************************************************* //
 
 // Some APIs from Firebug.FireCookieModel namespase are used here.
 var Firebug = EditCookie.getChromeWindow().Firebug;
 
-//-----------------------------------------------------------------------------
+// ********************************************************************************************* //
 }
