@@ -1337,6 +1337,9 @@ Firebug.FireCookieModel = extend(BaseModule,
             extension: "Firecookie",
             testListURL: "chrome://firecookie/content/testList.html"
         });
+
+        if (FBTrace.DBG_COOKIES)
+            FBTrace.sysout("cookies.onGetTestList; ");
     }
 }); 
 
