@@ -177,8 +177,11 @@ Firebug.FireCookieModel = extend(BaseModule,
      * @param {String} prefDomain Preference domain (e.g. extensions.firebug)
      * @param {Array} prefNames Default Firebug preference array.
      */
-    initialize: function(prefDomain, prefNames) 
+    initialize: function(prefDomain, prefNames)
     {
+        if (FBTrace.DBG_COOKIES)
+            FBTrace.sysout("cookies.FireCookieModel.initialize;");
+
         // Support for trace-console customization in Firebug 1.3
         if (Firebug.TraceModule && Firebug.TraceModule.addListener)
             Firebug.TraceModule.addListener(this.TraceListener);
