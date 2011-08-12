@@ -42,7 +42,7 @@
       <Description>
         <em:id>toolkit@mozilla.org</em:id>
         <em:minVersion>1.9.0.*</em:minVersion>
-        <em:maxVersion>2.2.0.*</em:maxVersion>
+        <em:maxVersion>8.0a1</em:maxVersion>
       </Description>
     </em:targetApplication>
 
@@ -60,7 +60,7 @@
       <Description>
         <em:id>firebug@software.joehewitt.com</em:id>
         <em:minVersion>1.5*</em:minVersion>
-        <em:maxVersion>1.7*</em:maxVersion>
+        <em:maxVersion>1.8*</em:maxVersion>
       </Description>
     </em:requires>-->
 
