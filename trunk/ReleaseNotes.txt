@@ -10,7 +10,8 @@ Release Notes for Firecookie 1.3
 ----------------------------------
 * Issue 95: Edit cookie is not working with FF4 RC2
 * Issue 100: pasted cookie values with quotes don't work?
-
+* Issue 112: Can't Remove / Delete all Cookies
+* Issue 109: file cookie edit title error.
 
 Release Notes for Firecookie 1.2.1
 ----------------------------------
