@@ -699,7 +699,7 @@ Firebug.FireCookieModel = extend(BaseModule,
 
         this.registerObservers(context);
 
-        $("fbStatusIcon").setAttribute(panelName, "on");
+        top.document.getElementById("firebugStatus").setAttribute(panelName, "on");
 
         // Make sure the panel is refreshed (no page reload) and the cookie
         // list is displayed instead of the Panel Activation Manager.
@@ -725,7 +725,7 @@ Firebug.FireCookieModel = extend(BaseModule,
 
     onLastPanelDeactivate: function(context, destroy)
     {
-        $("fbStatusIcon").removeAttribute(panelName);
+        top.document.getElementById("firebugStatus").removeAttribute(panelName);
 
         if (FBTrace.DBG_COOKIES)
             FBTrace.sysout("cookies.onLastPanelDeactivate");
@@ -803,7 +803,7 @@ Firebug.FireCookieModel = extend(BaseModule,
                 TabWatcher.iterateContexts(Firebug.FireCookieModel.unregisterObservers);
         }
 
-        $("fbStatusIcon").removeAttribute(panelName);
+        top.document.getElementById("firebugStatus").removeAttribute(panelName);
 
         if (FBTrace.DBG_COOKIES)
             FBTrace.sysout("cookies.onSuspendFirebug");
@@ -819,7 +819,7 @@ Firebug.FireCookieModel = extend(BaseModule,
             this.registerObservers(context);
 
             if (Firebug.FireCookieModel.isEnabled(context))
-                $("fbStatusIcon").setAttribute(panelName, "on");
+                top.document.getElementById("firebugStatus").setAttribute(panelName, "on");
         }
         else
         {
@@ -827,14 +827,14 @@ Firebug.FireCookieModel = extend(BaseModule,
             if (Firebug.FireCookieModel.isAlwaysEnabled())
                 TabWatcher.iterateContexts(Firebug.FireCookieModel.registerObservers);
 
-            $("fbStatusIcon").setAttribute(panelName, "on");
+            top.document.getElementById("firebugStatus").setAttribute(panelName, "on");
         }
 
         if (FBTrace.DBG_COOKIES)
             FBTrace.sysout("cookies.onResumeFirebug");
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     getMenuLabel: function(option, location)
     {
