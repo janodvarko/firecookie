@@ -1272,62 +1272,24 @@ Firebug.FireCookieModel = extend(BaseModule,
 
     onViewAll: function(context) 
     {
-        var brandName = $FC_STR_BRAND("brandShortName");
-        var parent = context.chrome.window;
-        
-        if (brandName == "SeaMonkey" || brandName == "Mozilla") 
-        {
-            viewCookies();
-        } 
-        else if (brandName == "Netscape")
-        {
-            parent.openDialog("chrome://browser/content/cookieviewer/CookieViewer.xul",
-                "_blank", "chrome,resizable=yes", "cookieManager");
-        } 
-        else 
-        {
         parent.openDialog("chrome://browser/content/preferences/cookies.xul",
-                "_blank", "chrome,resizable=yes", null);
-        }
+            "_blank", "chrome,resizable=yes", null);
     },
 
     onViewExceptions: function(context)
     {
-        var brandName = $FC_STR_BRAND("brandShortName");
-        var parent = context.chrome.window;
+        var params = {  
+            blockVisible   : true,
+            sessionVisible : true,
+            allowVisible   : true,
+            prefilledHost  : "",
+            permissionType : "cookie",
+            windowTitle    : $FC_STR("firecookie.ExceptionsTitle"),
+            introText      : $FC_STR("firecookie.Intro")
+        };
 
-        if (brandName == "SeaMonkey" || brandName == "Mozilla") 
-        {
-            viewCookies();
-        } 
-        else if (brandName == "Netscape") 
-        {
-            var params = { 
-                blockVisible    : true,
-                sessionVisible : true,
-                allowVisible   : true,
-                prefilledHost  : "",
-                permissionType : "cookie" 
-            };
-
-            parent.openDialog("chrome://browser/content/cookieviewer/CookieExceptions.xul",
-                "_blank", "chrome,resizable=yes", params);
-        } 
-        else
-        {
-            var params = {  
-                blockVisible   : true,
-                sessionVisible : true,
-                allowVisible   : true,
-                prefilledHost  : "",
-                permissionType : "cookie",
-                windowTitle    : $FC_STR("firecookie.ExceptionsTitle"),
-                introText      : $FC_STR("firecookie.Intro")
-            };
-
-            parent.openDialog("chrome://browser/content/preferences/permissions.xul",
-                "_blank","chrome,resizable=yes", params);
-        }
+        parent.openDialog("chrome://browser/content/preferences/permissions.xul",
+            "_blank","chrome,resizable=yes", params);
     },
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
