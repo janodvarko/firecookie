@@ -6,6 +6,13 @@ Localization: http://www.babelzilla.org/forum/index.php?showtopic=4494
 Source docs: http://www.janodvarko.cz/firecookie/docs/
 Releases: http://www.janodvarko.com/firecookie/archive/
 
+Release Notes for Firecookie 1.4
+----------------------------------
+
+Fixed issues:
+* Issue 124:  Cookies->Tools->Show All Cookies... doesn't open!!!
+
+
 Release Notes for Firecookie 1.3
 ----------------------------------
 * Issue 95: Edit cookie is not working with FF4 RC2
