@@ -1270,26 +1270,72 @@ Firebug.FireCookieModel = extend(BaseModule,
         }
     },
 
-    onViewAll: function(context) 
+    onViewAll: function(context)
     {
-        parent.openDialog("chrome://browser/content/preferences/cookies.xul",
-            "_blank", "chrome,resizable=yes", null);
+        var currentBrowser = FBL.getFileName(top.document.location.href);
+        var brandName = (currentBrowser == "navigator.xul") ? "SeaMonkey" : "Firefox";
+        var parent = context.chrome.window;
+
+        if (brandName == "SeaMonkey" || brandName == "Mozilla")
+        {
+            if (typeof(viewCookies) != "undefined")
+                viewCookies();
+            else
+                FBL.openNewTab("about:data");
+        }
+        else if (brandName == "Netscape")
+        {
+            parent.openDialog("chrome://browser/content/cookieviewer/CookieViewer.xul",
+                "_blank", "chrome,resizable=yes", "cookieManager");
+        }
+        else
+        {
+            parent.openDialog("chrome://browser/content/preferences/cookies.xul",
+                "_blank", "chrome,resizable=yes", null);
+        }
     },
 
     onViewExceptions: function(context)
     {
-        var params = {  
-            blockVisible   : true,
-            sessionVisible : true,
-            allowVisible   : true,
-            prefilledHost  : "",
-            permissionType : "cookie",
-            windowTitle    : $FC_STR("firecookie.ExceptionsTitle"),
-            introText      : $FC_STR("firecookie.Intro")
-        };
+        var currentBrowser = FBL.getFileName(top.document.location.href);
+        var brandName = (currentBrowser == "navigator.xul") ? "SeaMonkey" : "Firefox";
+        var parent = context.chrome.window;
 
-        parent.openDialog("chrome://browser/content/preferences/permissions.xul",
-            "_blank","chrome,resizable=yes", params);
+        if (brandName == "SeaMonkey" || brandName == "Mozilla")
+        {
+            if (typeof(viewCookies) != "undefined")
+                viewCookies();
+            else
+                FBL.openNewTab("about:data");
+        }
+        else if (brandName == "Netscape")
+        {
+            var params = {
+                blockVisible    : true,
+                sessionVisible : true,
+                allowVisible   : true,
+                prefilledHost  : "",
+                permissionType : "cookie"
+            };
+
+            parent.openDialog("chrome://browser/content/cookieviewer/CookieExceptions.xul",
+                "_blank", "chrome,resizable=yes", params);
+        }
+        else
+        {
+            var params = {
+                blockVisible   : true,
+                sessionVisible : true,
+                allowVisible   : true,
+                prefilledHost  : "",
+                permissionType : "cookie",
+                windowTitle    : $FC_STR("firecookie.ExceptionsTitle"),
+                introText      : $FC_STR("firecookie.Intro")
+            };
+
+            parent.openDialog("chrome://browser/content/preferences/permissions.xul",
+                "_blank","chrome,resizable=yes", params);
+        }
     },
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
